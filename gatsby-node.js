@@ -25,6 +25,34 @@ async function turnToppingsIntoPage({graphql, actions}){
         })
     })
 }
+async function turnSliceMastersIntoPage({graphql,actions}){
+    const { createPage } = actions
+    const sliceMastersTemplate = path.resolve('./src/pages/sliceMasters.jsx');
+    const {data} = await graphql(`
+        query {
+            sliceMasters: allSanityPerson{
+                totalCount
+                nodes{
+                    name
+                }
+            }
+        }
+    `)
+    const pageSize = process.env.GATSBY_PAGE_SIZE;
+    const pageCount = Math.ceil(data.sliceMasters.totalCount / pageSize)
+    Array.from({length:pageCount}).forEach((_,i)=>{
+        createPage({
+            path:`sliceMasters/${i+1}`,
+            component:sliceMastersTemplate,
+            context:{
+                skip: i*pageSize,
+                currentPage: i +1,
+                pageSize
+            }
+        })
+    })
+
+}
 async function turnPizzaIntoPage({ graphql, actions }){
     const { createPage } = actions
 
@@ -55,7 +83,23 @@ async function turnPizzaIntoPage({ graphql, actions }){
 async function fetchBeersAndTurnIntoNodes({actions,createNodeId,createContentDigest}){
       const res = await _fetch('https://api.sampleapis.com/beers/ale');
       const beers = await res.json();
-      console.log(beers)
+      for(const beer of beers){
+          const nodeContent = JSON.stringify(beer);
+          const nodeMeta = {
+              id: createNodeId(`beer-${beer.name}`),
+              parent:null,
+              children:[],
+              internal: {
+                  type: 'Beer',
+                  mediaType:'application/json',
+                  contentDigest: createContentDigest(beer)
+              }
+          };
+          actions.createNode({
+              ...beer,
+              ...nodeMeta
+          })
+      }
 
 }
 export async function sourceNodes(param){
@@ -63,6 +107,6 @@ export async function sourceNodes(param){
 }
 
 export async function createPages(params){
-    await Promise.all([turnPizzaIntoPage(params),turnToppingsIntoPage(params)]) 
+    await Promise.all([turnPizzaIntoPage(params),turnToppingsIntoPage(params),turnSliceMastersIntoPage(params)]) 
     
 }

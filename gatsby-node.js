@@ -32,9 +32,6 @@ async function turnSliceMastersIntoPage({graphql,actions}){
         query {
             sliceMasters: allSanityPerson{
                 totalCount
-                nodes{
-                    name
-                }
             }
         }
     `)

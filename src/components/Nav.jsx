@@ -91,7 +91,7 @@ export default function Nav() {
           <Link to="/beers">Beers</Link>
         </li>
         <li>
-          <Link to="/slicemasters">SliceMasters</Link>
+          <Link to="/slicemasters/1">SliceMasters</Link>
         </li>
       </ul>
     </StyledNav>

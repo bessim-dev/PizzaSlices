@@ -27,7 +27,7 @@ async function turnToppingsIntoPage({graphql, actions}){
 }
 async function turnSliceMastersIntoPage({graphql,actions}){
     const { createPage } = actions
-    const sliceMastersTemplate = path.resolve('./src/pages/sliceMasters.jsx');
+    const sliceMastersTemplate = path.resolve('./src/templates/Slicemasters.jsx');
     const {data} = await graphql(`
         query {
             sliceMasters: allSanityPerson{
@@ -35,16 +35,17 @@ async function turnSliceMastersIntoPage({graphql,actions}){
             }
         }
     `)
-    const pageSize = process.env.GATSBY_PAGE_SIZE;
-    const pageCount = Math.ceil(data.sliceMasters.totalCount / pageSize)
-    Array.from({length:pageCount}).forEach((_,i)=>{
+    const elementPerPage = parseInt(process.env.GATSBY_PAGE_SIZE);
+    const numOfPages = Math.ceil(data.sliceMasters.totalCount / elementPerPage)
+    Array.from({length:numOfPages}).forEach((_,i)=>{
         createPage({
-            path:`sliceMasters/${i+1}`,
+            path:`slicemasters/${i+1}`,
             component:sliceMastersTemplate,
             context:{
-                skip: i*pageSize,
+                skip: i*elementPerPage,
                 currentPage: i +1,
-                pageSize
+                elementPerPage,
+                numOfPages
             }
         })
     })

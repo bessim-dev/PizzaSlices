@@ -11,7 +11,7 @@ exports.components = {
   "component---src-pages-index-jsx": (preferDefault(require("D:\\Github shit\\gatsbyP\\gatsby\\src\\pages\\index.jsx"))),
   "component---src-pages-orders-jsx": (preferDefault(require("D:\\Github shit\\gatsbyP\\gatsby\\src\\pages\\orders.jsx"))),
   "component---src-pages-pizzas-jsx": (preferDefault(require("D:\\Github shit\\gatsbyP\\gatsby\\src\\pages\\pizzas.jsx"))),
-  "component---src-pages-slicemasters-jsx": (preferDefault(require("D:\\Github shit\\gatsbyP\\gatsby\\src\\pages\\slicemasters.jsx"))),
-  "component---src-templates-pizza-jsx": (preferDefault(require("D:\\Github shit\\gatsbyP\\gatsby\\src\\templates\\Pizza.jsx")))
+  "component---src-templates-pizza-jsx": (preferDefault(require("D:\\Github shit\\gatsbyP\\gatsby\\src\\templates\\Pizza.jsx"))),
+  "component---src-templates-slicemasters-jsx": (preferDefault(require("D:\\Github shit\\gatsbyP\\gatsby\\src\\templates\\Slicemasters.jsx")))
 }
 

@@ -2,7 +2,14 @@ import dotenv from 'dotenv';
 
 dotenv.config({ path: '.env' });
 export default {
+  siteMetadata : {
+    title: "Slick Slices",
+    siteUrl: "https://gatsby.pizza",
+    description: "the best Pizza in Tunisia",
+    twitter: "@bessim"
+  },
   plugins: [
+    'gatsby-plugin-react-helmet',
     `gatsby-plugin-styled-components`,
     {
       resolve: `gatsby-source-sanity`,

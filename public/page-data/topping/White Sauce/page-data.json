@@ -1,1 +1,1 @@
-{"componentChunkName":"component---src-pages-pizzas-jsx","path":"/topping/white sauce","result":{"data":{"pizzas":{"nodes":[]}},"pageContext":{"regex":"/White Sauce/i"}},"staticQueryHashes":["1115153702"]}
+{"componentChunkName":"component---src-pages-pizzas-jsx","path":"/topping/white sauce","result":{"data":{"pizzas":{"nodes":[]}},"pageContext":{"topping":"White Sauce","regex":"/White Sauce/i"}},"staticQueryHashes":["1115153702","735375095"]}

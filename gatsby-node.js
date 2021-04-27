@@ -20,6 +20,7 @@ async function turnToppingsIntoPage({graphql, actions}){
             path:`topping/${topping.name.toLowerCase()}`,
             component:toppingTemplate,
             context:{
+                topping: topping.name,
                 regex : `/${topping.name}/i`
             }
         })
@@ -28,13 +29,29 @@ async function turnToppingsIntoPage({graphql, actions}){
 async function turnSliceMastersIntoPage({graphql,actions}){
     const { createPage } = actions
     const sliceMastersTemplate = path.resolve('./src/templates/Slicemasters.jsx');
+    const singSliceMasterTemplate = path.resolve('./src/templates/SliceMaster.jsx')
     const {data} = await graphql(`
         query {
             sliceMasters: allSanityPerson{
                 totalCount
+                nodes{
+                    name
+                    slug{
+                        current
+                    }
+                }
             }
         }
     `)
+    data.sliceMasters.nodes.forEach(sliceMaster => {
+        createPage({
+            component: singSliceMasterTemplate,
+            path:`slicemasters/${sliceMaster.slug.current}`,
+            context:{
+                slug:sliceMaster.slug.current
+            }
+        })
+    })
     const elementPerPage = parseInt(process.env.GATSBY_PAGE_SIZE);
     const numOfPages = Math.ceil(data.sliceMasters.totalCount / elementPerPage)
     Array.from({length:numOfPages}).forEach((_,i)=>{
@@ -108,3 +125,14 @@ export async function createPages(params){
     await Promise.all([turnPizzaIntoPage(params),turnToppingsIntoPage(params),turnSliceMastersIntoPage(params)]) 
     
 }
+exports.onCreateWebpackConfig = ({ stage, actions }) => {
+    if (stage.startsWith("develop")) {
+      actions.setWebpackConfig({
+        resolve: {
+          alias: {
+            "react-dom": "@hot-loader/react-dom",
+          },
+        },
+      })
+    }
+  }

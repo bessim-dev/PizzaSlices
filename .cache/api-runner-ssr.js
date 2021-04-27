@@ -1,4 +1,7 @@
 var plugins = [{
+      plugin: require('D:/Github shit/gatsbyP/gatsby/node_modules/gatsby-plugin-react-helmet/gatsby-ssr'),
+      options: {"plugins":[]},
+    },{
       plugin: require('D:/Github shit/gatsbyP/gatsby/node_modules/gatsby-plugin-styled-components/gatsby-ssr'),
       options: {"plugins":[]},
     },{

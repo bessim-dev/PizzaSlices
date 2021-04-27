@@ -55,7 +55,7 @@ const countToppings = (pizzas) => {
   return sortedToppings;
 }
 
-export default function Toppings() {
+export default function Toppings({ activeTopping }) {
   const { pizzas } = useStaticQuery(graphql`
     query {
 
@@ -71,9 +71,13 @@ export default function Toppings() {
   `);
   const toppingsWithCount = countToppings(pizzas.nodes);
   return <ToppingsStyles>
+    <Link to="/pizzas">
+      <span className="name">All</span>
+      <span className="count">{pizzas.nodes.length}</span>
+    </Link>
     {
       toppingsWithCount.map(topping => (
-        <Link to={`/topping/${topping.name.toLowerCase()}`} key={topping.id}>
+        <Link to={`/topping/${topping.name.toLowerCase()}`} key={topping.id}  className={topping.name === activeTopping ? 'active' : ''}>
           <span className="name">{topping.name}</span>
           <span className="count">{topping.count}</span>
         </Link>

@@ -5,6 +5,7 @@ const preferDefault = m => (m && m.default) || m
 
 
 exports.components = {
+  "component---cache-dev-404-page-js": hot(preferDefault(require("D:\\Github shit\\gatsbyP\\gatsby\\.cache\\dev-404-page.js"))),
   "component---src-pages-404-jsx": hot(preferDefault(require("D:\\Github shit\\gatsbyP\\gatsby\\src\\pages\\404.jsx"))),
   "component---src-pages-beers-jsx": hot(preferDefault(require("D:\\Github shit\\gatsbyP\\gatsby\\src\\pages\\beers.jsx"))),
   "component---src-pages-index-jsx": hot(preferDefault(require("D:\\Github shit\\gatsbyP\\gatsby\\src\\pages\\index.jsx"))),

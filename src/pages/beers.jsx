@@ -1,5 +1,5 @@
 import { graphql } from 'gatsby';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 
@@ -24,33 +24,43 @@ const StyledBeer = styled.div`
   }
 
 `
-function Beer({beer}) {
+
+function Beer({ beer }) {
   const rating = Math.round(beer.rating.average)
-  return(
+  return (
     <StyledBeer >
-      <img src={beer.image} alt={beer.name}/>
+      <img src={beer.image} alt={beer.name} />
       <h3>{beer.name}</h3>
       {beer.price}
       <p title={`${rating} out of 5 stars`}>
         {`⭐`.repeat(rating)}
-        <span style={{filter:'grayscale(100%)'}}>
-        {`⭐`.repeat(5-rating)}
+        <span style={{ filter: 'grayscale(100%)' }}>
+          {`⭐`.repeat(5 - rating)}
         </span>
       </p>
     </StyledBeer>
   )
 }
 
-export default function BeersPage({data}) {
-  const beers = data.beers.nodes
+
+export default function BeersPage({ data }) {
+  //some  beersdon't have an image so to fix that i will change every beer and add it to the valid beers array
+  function checkImage(beer, callback) {
+    const beers = []
+    var image = new Image();
+    image.src = beer.image;
+    return image.complete
+  }
+  const beers = data.beers.nodes.filter(checkImage)
+
   return (
     <>
       <h2 className="center">We have {beers.length} different type of Beers Available</h2>
-    <BeersGrid>
-      {
-        beers.map((beer)=><Beer beer={beer} key={beer.id}/>)
-      }
-    </BeersGrid>
+      <BeersGrid>
+        {
+          beers.length && beers.map((beer) => <Beer beer={beer} key={beer.id} />)
+        }
+      </BeersGrid>
     </>
   );
 }

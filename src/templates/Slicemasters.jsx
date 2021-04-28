@@ -8,11 +8,14 @@ import SEO from '../components/SEO';
 const SliceMastersGrid = styled.div`
   display:grid;
   grid-gap:2rem;
-  grid-template-columns:repeat(auto-fill,minmax(250px, 1fr));
+  grid-template-columns:repeat(2,minmax(250px, 1fr));
+  justify-items:center;
+  align-items:center;
 `
 const StyledSliceMaster = styled.div`
 display: flex;
 flex-direction:column;
+justify-content:center;
 a{
   text-decoration:none;
 }
@@ -40,13 +43,13 @@ h2{
   transform:rotate(1deg);
 }
 `
-export default function Slicemasters({data,pageContext}) {
+export default function Slicemasters({ data, pageContext }) {
   const sliceMasters = data.sliceMasters.nodes;
-  const {elementPerPage,currentPage,skip,numOfPages}=pageContext;
+  const { elementPerPage, currentPage, skip, numOfPages } = pageContext;
   return (
     <>
-       <SEO title={`Slicemasters - Page ${pageContext.currentPage || 1}`} />
-    <Pagination base="/slicemasters" elementPerPage={elementPerPage} currentPage={currentPage} skip={skip} numOfPages={numOfPages} />
+      <SEO title={`Slicemasters - Page ${pageContext.currentPage || 1}`} />
+      <Pagination base="/slicemasters" elementPerPage={elementPerPage} currentPage={currentPage} skip={skip} numOfPages={numOfPages} />
       <SliceMastersGrid>
         {
           sliceMasters.map(person => (
@@ -56,7 +59,7 @@ export default function Slicemasters({data,pageContext}) {
                   <span className="mark">{person.name} </span>
                 </h2>
               </Link>
-              <GatsbyImage fluid={person.image.asset.fluid}/>
+              <GatsbyImage fluid={person.image.asset.fluid} />
               <p className="description">{person.description} </p>
             </StyledSliceMaster>
           ))

@@ -45,14 +45,13 @@ function Beer({ beer }) {
 
 export default function BeersPage({ data }) {
   //some  beersdon't have an image so to fix that i will change every beer and add it to the valid beers array
-  function checkImage(beer, callback) {
-    const beers = []
+  function checkImage(beer) {
     var image = new Image();
     image.src = beer.image;
     return image.complete
   }
   const beers = data.beers.nodes.filter(checkImage)
-
+  console.log(beers)
   return (
     <>
       <h2 className="center">We have {beers.length} different type of Beers Available</h2>

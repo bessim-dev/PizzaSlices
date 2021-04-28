@@ -1,5 +1,5 @@
 import { graphql } from 'gatsby';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 
@@ -45,12 +45,18 @@ function Beer({ beer }) {
 
 export default function BeersPage({ data }) {
   //some  beersdon't have an image so to fix that i will change every beer and add it to the valid beers array
+  const [beers, setBeers] = useState([])
   function checkImage(beer) {
-    var image = new Image();
+    var image = document.createElement("img");
     image.src = beer.image;
-    return image.complete
+    return image.complete && image.height > 0
   }
-  const beers = data.beers.nodes.filter(checkImage)
+  useEffect(() => {
+    setBeers(data.beers.nodes.filter(checkImage))
+  }, [data])
+
+
+
   console.log(beers)
   return (
     <>

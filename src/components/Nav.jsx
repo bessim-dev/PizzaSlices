@@ -1,7 +1,7 @@
 import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
-import Logo from './Logo';
+import pizza from '../assets/images/pizza.svg';
 
 const StyledNav = styled.nav`
   margin-bottom: 3rem;
@@ -73,25 +73,26 @@ const StyledNav = styled.nav`
   }
 `;
 export default function Nav() {
+  console.log(pizza)
   return (
     <StyledNav>
       <ul>
         <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
           <Link to="/pizzas">Pizzas</Link>
-        </li>
-        <li>
-          <Link to="/">
-            <Logo />
-          </Link>
         </li>
         <li>
           <Link to="/beers">Beers</Link>
         </li>
         <li>
+          <Link to="/">
+            <img src={pizza} alt="logo" height={150}/>
+          </Link>
+        </li>
+        <li>
           <Link to="/slicemasters/1">SliceMasters</Link>
+        </li>
+        <li>
+          <Link to="/orders">Order!</Link>
         </li>
       </ul>
     </StyledNav>
